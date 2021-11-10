@@ -11,7 +11,7 @@ module.exports = async (req, res, next) => {
   users.authenticateBasic(username, password).then(validUser => {
     req.user = validUser;
     next();
-  }).catch(err => { next('Invalid Login') })
+  }).catch(err => { next('Invalid 1Login') })
   
 
 

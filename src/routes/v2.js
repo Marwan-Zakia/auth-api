@@ -10,6 +10,8 @@ const acl = require('../middleware/acl')
 
 
 router.param('model', (req, res, next) => {
+ 
+ 
   const modelName = req.params.model;
   if (dataModules[modelName]) {
     req.model = dataModules[modelName];
@@ -17,17 +19,19 @@ router.param('model', (req, res, next) => {
   } else {
     next('Invalid Model');
   }
+  
+
 });
 //app.post('/img', bearer, acl('create'), (req, res) => {
 //   res.send('new img was created');
 // });
 // GET /
 //
-router.get('/:model',basicAuth, handleGetAll);
-router.get('/:model/:id',basicAuth, handleGetOne);
-router.post('/:model',bearerAuth,acl('create'), handleCreate);
-router.put('/:model/:id',bearerAuth,acl('update'), handleUpdate);
-router.delete('/:model/:id',bearerAuth,acl('delete'), handleDelete);
+router.get('/:model',basicAuth,handleGetAll);
+router.get('/:model/:id',basicAuth,handleGetOne);
+router.post('/:model',bearerAuth,acl('create'),handleCreate);
+router.put('/:model/:id',bearerAuth,acl('update'),handleUpdate);
+router.delete('/:model/:id',bearerAuth,acl('delete'),handleDelete);
 
 async function handleGetAll(req, res) {
   let allRecords = await req.model.get();
