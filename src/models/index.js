@@ -7,9 +7,18 @@ const foodModel = require('./food/model');
 
 
 
+let sequelizeOptions = process.env.NODE_ENV === 'production' ? {
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    }
+  }
+} : {};
+
 
 const DATABASE_URL = process.env.DATABASE_URL || 'sqlite:memory:';
-const sequelize = new Sequelize(DATABASE_URL);
+const sequelize = new Sequelize(DATABASE_URL,sequelizeOptions);
 
 
 
